@@ -186,7 +186,9 @@ func (p* Player) DownloadSong(song Song) (Song, error) {
 }
 
 func (p *Player) UpdateStatus(s string) {
-	session.ChannelMessageSend(settings.PlayerTextChannel, fmt.Sprintf("Now playing - %s", s))
+	if s != "" {
+		session.ChannelMessageSend(settings.PlayerTextChannel, fmt.Sprintf("Now playing - %s", s))
+	}
 	session.UpdateStatus(0, s)
 }
 
