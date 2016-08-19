@@ -37,6 +37,12 @@ func (b *Bot) Init() {
 				if pe != nil {
 					bot.Log("Player init failed: " + pe.Error())
 				}
+				
+				test := "https://www.youtube.com/watch?v=9EECxMG-w0M"
+				n, u := GetYTAudio(test)
+				if u != "" {
+					player.AddSong(n, u)
+				}
 			} else {
 				b.Log("Error getting voice channel, player was not setup")
 			}
