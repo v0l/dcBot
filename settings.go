@@ -5,27 +5,30 @@ import (
 	"io/ioutil"
 )
 
-type Settings struct{
-	PlayerTextChannel string
+type Settings struct {
+	PlayerTextChannel  string
 	PlayerVoiceChannel string
-	BotToken string
+	BotToken           string
 }
 
-func LoadSettings() (Settings,error) {
+func LoadSettings() (Settings, error) {
 	var outs Settings
 	var oute error
-	
+
 	data, de := ioutil.ReadFile("settings.json")
 	if de == nil {
 		json.Unmarshal(data, &outs)
-	}else{
+	} else {
 		oute = de
+
+		//save and empty settings file
+		SaveSettings(&Settings{})
 	}
-	
+
 	return outs, oute
 }
 
-func SaveSettings(s *Settings){
+func SaveSettings(s *Settings) {
 	data, de := json.MarshalIndent(s, "", "\t")
 	if de == nil {
 		we := ioutil.WriteFile("settings.json", data, 644)

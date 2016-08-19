@@ -112,18 +112,18 @@ func GetYTInfo(c string) youtubedl {
 	return youtubedl{}
 }
 
-func GetYTAudio(v string) (string, string) { 
+func GetYTAudio(v string) (string, string) {
 	var outn, outu string
 	yt := GetYTInfo(v)
 	outn = yt.Title
-	
+
 	for _, a := range yt.Formats {
 		if a.Acodec == "opus" { //take first opus track we find
 			outu = a.URL
 			break
 		}
 	}
-	
+
 	if outu == "" {
 		for _, a := range yt.Formats {
 			if a.Protocol == "https" || a.Protocol == "http" { //take first direct file link
@@ -132,6 +132,6 @@ func GetYTAudio(v string) (string, string) {
 			}
 		}
 	}
-	
+
 	return outn, outu
 }
